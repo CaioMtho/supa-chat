@@ -17,13 +17,16 @@ export class AuthService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
 
     this.supabase.auth.onAuthStateChange((event, sess) => {
-      console.log('SUPABAS AUTH CHANGED: ', event);
-      console.log('SUPABAS AUTH CHANGED sess: ', sess);
+      console.log('SUPABASE AUTH CHANGED: ', event);
+      console.log('SUPABASE AUTH CHANGED sess: ', sess);
 
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         console.log('SET USER');
-
         this.currentUser.next(sess.user);
+      } else if (event === 'PASSWORD_RECOVERY') {
+        console.log('PASSWORD RECOVERY EVENT');
+        this.currentUser.next(sess.user);
+        this.router.navigateByUrl('/reset-password', { replaceUrl: true });
       } else {
         this.currentUser.next(false);
       }
@@ -37,6 +40,7 @@ export class AuthService {
       console.log('ALREADY GOT USER');
       return;
     }
+
     const user = await this.supabase.auth.getUser();
     console.log('🚀 ~ file: auth.service.ts ~ line 33 ~ AuthService ~ loadUser ~ session', user);
 
@@ -56,14 +60,33 @@ export class AuthService {
   }
 
   signInWithEmail(email: string) {
-    const redirectTo = isPlatform('capacitor') ? 'supachat://login' : `${window.location.origin}/groups`;
-    console.log('set redirect: ', redirectTo);
+    const redirectTo = isPlatform('capacitor')
+      ? 'supachat://login'
+      : `${window.location.origin}/groups`;
 
-    return this.supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo } });
+    console.log('set redirect: ', redirectTo);
+    return this.supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: redirectTo }
+    });
   }
 
-  sendPwReset(email) {
-    return this.supabase.auth.resetPasswordForEmail(email);
+  sendPwReset(email: string) {
+    const redirectTo = isPlatform('capacitor')
+      ? 'supachat://reset-password'
+      : `${window.location.origin}/reset-password`;
+
+    console.log('Password reset redirect: ', redirectTo);
+
+    return this.supabase.auth.resetPasswordForEmail(email, {
+      redirectTo
+    });
+  }
+
+  async updatePassword(newPassword: string) {
+    return this.supabase.auth.updateUser({
+      password: newPassword
+    });
   }
 
   async signOut() {

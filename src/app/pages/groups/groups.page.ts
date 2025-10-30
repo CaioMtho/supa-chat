@@ -31,22 +31,22 @@ export class GroupsPage implements OnInit {
 
   async createGroup() {
     const alert = await this.alertController.create({
-      header: 'Start Chat Group',
-      message: 'Enter a name for your group. Note that all groups are public in this app!',
+      header: 'Comece um grupo de chat',
+      message: 'Insira o nome do chat público!',
       inputs: [
         {
           type: 'text',
           name: 'title',
-          placeholder: 'My cool group',
+          placeholder: 'Meu grupo',
         },
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
         },
         {
-          text: 'Create group',
+          text: 'Criar grupo',
           handler: async (data) => {
             const loading = await this.loadingController.create();
             await loading.present();
