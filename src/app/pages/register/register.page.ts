@@ -39,9 +39,9 @@ export class RegisterPage {
       console.log('data: ', data);
 
       if (data.error) {
-        this.showAlert('Registration failed', data.error.message);
+        this.showAlert('Cadastro falhou', data.error.message);
       } else {
-        this.showAlert('Signup success', 'Please confirm your email now!');
+        this.showAlert('Sucesso no cadastro', 'Confirme seu email!');
         this.navCtrl.navigateBack('');
       }
     });

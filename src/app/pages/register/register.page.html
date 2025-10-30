@@ -12,17 +12,17 @@
     <ion-card-content>
       <form (ngSubmit)="createAccount()" [formGroup]="credentials">
         <ion-item>
-          <ion-label position="stacked">Your Email</ion-label>
+          <ion-label position="stacked">Seu email</ion-label>
           <ion-input type="email" inputmode="email" placeholder="Email" formControlName="email"></ion-input>
-          <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Please insert a valid email</ion-note>
+          <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Por favor, insira um email válido</ion-note>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">Password</ion-label>
+          <ion-label position="stacked">Senha</ion-label>
           <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-          <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors?.required">Please insert a password</ion-note>
-          <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors?.minlength">Minlength 6 characters</ion-note>
+          <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors?.required">Por favor insira uma senha</ion-note>
+          <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors?.minlength">No mínimo 6 caracteres</ion-note>
         </ion-item>
-        <ion-button type="submit" expand="block" strong="true" [disabled]="!credentials.valid">Create my account</ion-button>
+        <ion-button type="submit" expand="block" strong="true" [disabled]="!credentials.valid">Criar minha conta</ion-button>
       </form>
     </ion-card-content>
   </ion-card>

@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Supa Chat Groups</ion-title>
+    <ion-title>Grupos</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="signOut()" *ngIf="user | async"> <ion-icon name="log-out-outline" slot="icon-only"></ion-icon> </ion-button>
 
-      <ion-button (click)="openLogin()" *ngIf="(user | async) === false"> Sign in </ion-button>
+      <ion-button (click)="openLogin()" *ngIf="(user | async) === false"> Entrar </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

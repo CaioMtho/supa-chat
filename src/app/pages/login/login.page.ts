@@ -52,8 +52,8 @@ export class LoginPage {
   }
   async forgotPw() {
     const alert = await this.alertController.create({
-      header: 'Receive a new password',
-      message: 'Please insert your email',
+      header: 'Receber uma nova senha',
+      message: 'Insira seu email',
       inputs: [
         {
           type: 'email',
@@ -62,11 +62,11 @@ export class LoginPage {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
         },
         {
-          text: 'Reset password',
+          text: 'Redefinir senha',
           handler: async (result) => {
             const loading = await this.loadingController.create();
             await loading.present();
@@ -74,9 +74,9 @@ export class LoginPage {
             await loading.dismiss();
 
             if (error) {
-              this.showAlert('Failed', error.message);
+              this.showAlert('Erro', error.message);
             } else {
-              this.showAlert('Success', 'Please check your emails for further instructions!');
+              this.showAlert('Sucesso', 'Veja seu email para novas instruções');
             }
           },
         },
@@ -87,22 +87,22 @@ export class LoginPage {
 
   async getMagicLink() {
     const alert = await this.alertController.create({
-      header: 'Get a Magic Link',
-      message: 'We will send you a link to magically log in!',
+      header: 'Entrar por email',
+      message: 'Vamos enviar um link para entrar no seu email!',
       inputs: [
         {
           type: 'email',
           name: 'email',
-          value: 'isaacout@gmail.com',
+          value: 'exemplo@email.com',
         },
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
         },
         {
-          text: 'Get Magic Link',
+          text: 'Receber email',
           handler: async (result) => {
             const loading = await this.loadingController.create();
             await loading.present();
@@ -112,9 +112,9 @@ export class LoginPage {
             console.log('after signup error: ', error);
 
             if (error) {
-              this.showAlert('Failed', error.message);
+              this.showAlert('Erro', error.message);
             } else {
-              this.showAlert('Success', 'Please check your emails for further instructions!');
+              this.showAlert('Successo', 'Veja seu email para novas instruções!');
             }
           },
         },
